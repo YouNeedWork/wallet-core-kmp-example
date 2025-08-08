@@ -38,7 +38,6 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
-
             implementation(libs.wallet.core.kotlin.android)
         }
 
@@ -53,6 +52,9 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
 
             implementation(libs.wallet.core.kotlin)
+            implementation(libs.kermit)
+
+            api(libs.compose.webview.multiplatform)
         }
 
         commonTest.dependencies {

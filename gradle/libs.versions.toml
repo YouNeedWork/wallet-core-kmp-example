@@ -10,12 +10,16 @@ androidx-espresso = "3.6.1"
 androidx-lifecycle = "2.9.1"
 androidx-testExt = "1.2.1"
 composeMultiplatform = "1.8.2"
+composeWebviewMultiplatform = "2.0.2"
 junit = "4.13.2"
+kermit = "2.0.4"
 kotlin = "2.2.0"
 wallet-core = "4.3.6"
 
 
 [libraries]
+compose-webview-multiplatform = { module = "io.github.kevinnzou:compose-webview-multiplatform", version.ref = "composeWebviewMultiplatform" }
+kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-testJunit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 junit = { module = "junit:junit", version.ref = "junit" }
@@ -31,7 +35,6 @@ androidx-lifecycle-runtimeCompose = { module = "org.jetbrains.androidx.lifecycle
 wallet-core = {module="com.trustwallet:wallet-core", version.ref = "wallet-core"}
 wallet-core-kotlin = {module="com.trustwallet:wallet-core-kotlin", version.ref = "wallet-core"}
 wallet-core-kotlin-android = {module="com.trustwallet:wallet-core-kotlin-android", version.ref = "wallet-core"}
-
 wallet-core-kotlin-iosarm64 = {module="com.trustwallet:wallet-core-kotlin-iosarm64", version.ref = "wallet-core"}
 wallet-core-kotlin-iossimulatorarm64  = {module="com.trustwallet:wallet-core-kotlin-iossimulatorarm64", version.ref = "wallet-core"}
 wallet-core-kotlin-iosx64 = {module="com.trustwallet:wallet-core-kotlin-iosx64", version.ref = "wallet-core"}

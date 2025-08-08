@@ -8,18 +8,16 @@ pluginManagement {
             url = uri("https://maven.pkg.github.com/trustwallet/wallet-core")
             credentials {
                 username = "YouNeedWork"
-                password = "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"
+                password = "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"
             }
         }
 
+        mavenCentral()
         maven { url = uri("https://maven.aliyun.com/repository/public")}
         maven { url = uri("https://maven.aliyun.com/repository/central")}
         maven { url = uri("https://maven.aliyun.com/repository/gradle-plugin")}
         maven { url = uri("https://maven.aliyun.com/repository/apache-snapshots")}
 
-
-
-        mavenLocal()
 
         google {
             mavenContent {
@@ -28,9 +26,8 @@ pluginManagement {
                 includeGroupAndSubgroups("com.google")
             }
         }
-        google()
-        mavenCentral()
-        gradlePluginPortal()
+        maven("https://jogamp.org/deployment/maven")
+        mavenLocal()
     }
 }
 
@@ -40,16 +37,15 @@ dependencyResolutionManagement {
             url = uri("https://maven.pkg.github.com/trustwallet/wallet-core")
             credentials {
                 username = "YouNeedWork"
-                password = "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"
+                password = "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"
             }
         }
 
+        mavenCentral()
         maven { url = uri("https://maven.aliyun.com/repository/public")}
         maven { url = uri("https://maven.aliyun.com/repository/central")}
         maven { url = uri("https://maven.aliyun.com/repository/gradle-plugin")}
         maven { url = uri("https://maven.aliyun.com/repository/apache-snapshots")}
-
-        mavenLocal()
 
         google {
             mavenContent {
@@ -58,7 +54,8 @@ dependencyResolutionManagement {
                 includeGroupAndSubgroups("com.google")
             }
         }
-        google()
+        maven("https://jogamp.org/deployment/maven")
+        mavenLocal()
     }
 }
 

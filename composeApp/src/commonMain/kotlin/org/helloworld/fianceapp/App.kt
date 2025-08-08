@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.absolutePadding
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -17,6 +18,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.AlertDialogDefaults
 import androidx.compose.material3.Button
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -26,15 +28,27 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.HorizontalAlignmentLine
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import co.touchlab.kermit.Logger
+import co.touchlab.kermit.Severity
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 import financetrchingapp.composeapp.generated.resources.Res
 import financetrchingapp.composeapp.generated.resources.compose_multiplatform
 
-import com.trustwallet.core.HDWallet;
-import com.trustwallet.core.CoinType;
+import com.trustwallet.core.HDWallet
+import com.trustwallet.core.CoinType
+import com.trustwallet.core.EthereumMessageSigner
+
+import com.multiplatform.webview.cookie.Cookie
+import com.multiplatform.webview.util.KLogSeverity
+import com.multiplatform.webview.web.LoadingState
+import com.multiplatform.webview.web.WebView
+import com.multiplatform.webview.web.WebViewState
+import com.multiplatform.webview.web.rememberWebViewNavigator
+import com.multiplatform.webview.web.rememberWebViewState
+
+
 
 
 @Composable
@@ -50,6 +64,38 @@ fun App() {
         val ethAddress = wallet.getAddressForCoin(CoinType.Ethereum)
         log += "Ethereum address: ${ethAddress}\n\n"
 
+        var key =  wallet.getKeyForCoin(CoinType.Ethereum)
+
+        var msg=  EthereumMessageSigner.signMessage(key,"123")
+        var res = EthereumMessageSigner.verifyMessage(key.getPublicKey(CoinType.Ethereum),"123",msg)
+
+        log+= "sign result verify          ${res}\n\n"
+
+
+        Logger.log(
+            Severity.Info,
+            "L",
+            null,
+            log,
+        )
+
+        Column {
+            val state = rememberWebViewState("https://github.com/KevinnZou/compose-webview-multiplatform")
+
+            Text(text = "${state.pageTitle}")
+            val loadingState = state.loadingState
+            if (loadingState is LoadingState.Loading) {
+                LinearProgressIndicator(
+                    progress = loadingState.progress,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+
+            WebView(
+                state,
+                modifier = Modifier.width(200.dp).height(200.dp).background(color = Color.Blue)
+            )
+        }
 
         Column(
             modifier = Modifier
@@ -59,7 +105,13 @@ fun App() {
 
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Text(log)
+            //Text(log)
+
+            val state = rememberWebViewState("https://github.com/KevinnZou/compose-webview-multiplatform")
+            WebView(
+                state,
+                modifier = Modifier.fillMaxSize().background(color = Color.Blue)
+            )
 
             Button(onClick = { showContent = !showContent }) {
                 Text("Click me!")
@@ -78,5 +130,6 @@ fun App() {
         }
     }
 }
+
 
 
