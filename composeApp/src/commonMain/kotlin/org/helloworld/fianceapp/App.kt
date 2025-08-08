@@ -79,23 +79,7 @@ fun App() {
             log,
         )
 
-        Column {
-            val state = rememberWebViewState("https://github.com/KevinnZou/compose-webview-multiplatform")
 
-            Text(text = "${state.pageTitle}")
-            val loadingState = state.loadingState
-            if (loadingState is LoadingState.Loading) {
-                LinearProgressIndicator(
-                    progress = loadingState.progress,
-                    modifier = Modifier.fillMaxWidth()
-                )
-            }
-
-            WebView(
-                state,
-                modifier = Modifier.width(200.dp).height(200.dp).background(color = Color.Blue)
-            )
-        }
 
         Column(
             modifier = Modifier
@@ -107,11 +91,25 @@ fun App() {
         ) {
             //Text(log)
 
-            val state = rememberWebViewState("https://github.com/KevinnZou/compose-webview-multiplatform")
-            WebView(
-                state,
-                modifier = Modifier.fillMaxSize().background(color = Color.Blue)
-            )
+
+            Column {
+                val state = rememberWebViewState("https://github.com/KevinnZou/compose-webview-multiplatform")
+
+                Text(text = "${state.pageTitle}")
+                val loadingState = state.loadingState
+                if (loadingState is LoadingState.Loading) {
+                    LinearProgressIndicator(
+                        progress = loadingState.progress,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+
+                    WebView(
+                        state,
+                        modifier = Modifier.fillMaxSize().background(color = Color.Blue)
+                    )
+
+            }
 
             Button(onClick = { showContent = !showContent }) {
                 Text("Click me!")
