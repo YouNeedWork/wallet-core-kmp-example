@@ -14,8 +14,12 @@ composeWebviewMultiplatform = "2.0.2"
 junit = "4.13.2"
 kermit = "2.0.4"
 kotlin = "2.2.0"
+voyager = "1.1.0-beta03"
 wallet-core = "4.3.6"
 
+
+ktor = "3.2.3"
+coroutines = "1.10.2"
 
 [libraries]
 compose-webview-multiplatform = { module = "io.github.kevinnzou:compose-webview-multiplatform", version.ref = "composeWebviewMultiplatform" }
@@ -32,13 +36,20 @@ androidx-lifecycle-viewmodelCompose = { module = "org.jetbrains.androidx.lifecyc
 androidx-lifecycle-runtimeCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
 
 
-wallet-core = {module="com.trustwallet:wallet-core", version.ref = "wallet-core"}
+voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
+voyager-screenmodel = { module = "cafe.adriel.voyager:voyager-screenmodel", version.ref = "voyager" }
 wallet-core-kotlin = {module="com.trustwallet:wallet-core-kotlin", version.ref = "wallet-core"}
 wallet-core-kotlin-android = {module="com.trustwallet:wallet-core-kotlin-android", version.ref = "wallet-core"}
 wallet-core-kotlin-iosarm64 = {module="com.trustwallet:wallet-core-kotlin-iosarm64", version.ref = "wallet-core"}
 wallet-core-kotlin-iossimulatorarm64  = {module="com.trustwallet:wallet-core-kotlin-iossimulatorarm64", version.ref = "wallet-core"}
 wallet-core-kotlin-iosx64 = {module="com.trustwallet:wallet-core-kotlin-iosx64", version.ref = "wallet-core"}
 
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
+
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

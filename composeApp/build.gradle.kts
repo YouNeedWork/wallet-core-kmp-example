@@ -33,12 +33,15 @@ kotlin {
             implementation(libs.wallet.core.kotlin.iosarm64)
             implementation(libs.wallet.core.kotlin.iossimulatorarm64)
             implementation(libs.wallet.core.kotlin.iosx64)
+            implementation(libs.ktor.client.darwin)
         }
 
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.wallet.core.kotlin.android)
+            implementation(libs.ktor.client.okhttp)
+            implementation(libs.kotlinx.coroutines.android)
         }
 
         commonMain.dependencies {
@@ -55,6 +58,13 @@ kotlin {
             implementation(libs.kermit)
 
             api(libs.compose.webview.multiplatform)
+            implementation(libs.ktor.client.core)
+            implementation(libs.kotlinx.coroutines.core)
+
+            // Navigator
+            implementation(libs.voyager.navigator)
+            // Screen Model
+            implementation(libs.voyager.screenmodel)
         }
 
         commonTest.dependencies {

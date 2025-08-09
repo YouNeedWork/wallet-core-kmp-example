@@ -28,6 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.HorizontalAlignmentLine
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
 import co.touchlab.kermit.Logger
 import co.touchlab.kermit.Severity
 import org.jetbrains.compose.resources.painterResource
@@ -49,11 +50,14 @@ import com.multiplatform.webview.web.rememberWebViewNavigator
 import com.multiplatform.webview.web.rememberWebViewState
 
 
-
+import kotlinx.coroutines.launch
 
 @Composable
 @Preview
 fun App() {
+
+    //Navigator(HomeScreen)
+
     MaterialTheme {
         var showContent by remember { mutableStateOf(false) }
         var log = ""
@@ -79,7 +83,17 @@ fun App() {
             log,
         )
 
-
+        val scope = rememberCoroutineScope()
+        var text by remember { mutableStateOf("Loading") }
+        LaunchedEffect(true) {
+            scope.launch {
+                text = try {
+                    Greeting().greeting()
+                } catch (e: Exception) {
+                    e.message ?: "error"
+                }
+            }
+        }
 
         Column(
             modifier = Modifier
@@ -89,40 +103,17 @@ fun App() {
 
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            //Text(log)
-
-
-            Column {
-                val state = rememberWebViewState("https://github.com/KevinnZou/compose-webview-multiplatform")
-
-                Text(text = "${state.pageTitle}")
-                val loadingState = state.loadingState
-                if (loadingState is LoadingState.Loading) {
-                    LinearProgressIndicator(
-                        progress = loadingState.progress,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
-
-                    WebView(
-                        state,
-                        modifier = Modifier.fillMaxSize().background(color = Color.Blue)
-                    )
-
-            }
-
             Button(onClick = { showContent = !showContent }) {
                 Text("Click me!")
             }
 
             AnimatedVisibility(showContent) {
-                val greeting = remember { Greeting().greet() }
                 Column(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Compose: $greeting")
+                    Text(text)
                 }
             }
         }
